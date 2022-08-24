@@ -1,5 +1,5 @@
 
-# TP1 - Fundamentos
+# IA1 - Fundamentos
 ## 1. Buscar 2 ejemplos de aplicaciones de inteligencia artificial.
 ### Detección de ataques DOS / DDOS 
 El objetivo principal de los ataques de Denegación de Servicio (DOS) es crear un tráfico maligno mediante el uso de distintos tipos de paquetes de red que logran privar del acceso a usuarios legítimos de un servicio/servidor web. 
