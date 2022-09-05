@@ -77,5 +77,5 @@ En el siguiente gráfico se observa el comportamiento de cada agente para cada u
 <img src="./attachments/boxplot.svg">
 
 # Lineplot
-En este gráfico, se analiza como evoluciona para cada agente el *cleaned_slots* a medida que aumenta el tamaño de la grilla. Un gráfico por *ratio de suciedad*. Eje vertical en escala logarítmica.
+En este gráfico, se analiza como evoluciona para cada agente el *cleaned_slots* a medida que aumenta el tamaño de la grilla. Un gráfico por *ratio de suciedad*.
 <img src="./attachments/lineplot.svg">
