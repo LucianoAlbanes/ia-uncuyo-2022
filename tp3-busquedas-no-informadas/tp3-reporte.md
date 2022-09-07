@@ -38,4 +38,4 @@ Según los resultados obtenidos, se concluye lo siguiente:
 - Respecto a DLS, solo encuentra soluciones cuando el objetivo esta a una distancia menor o igual a la dada por el límite. No presenta mejoras en el tamaño de la solución del problema respecto a BFS y UCS.
 
 Por lo tanto, la solución ideal el problema planteado es la búsqueda por profundidad (BFS). Esto se debe a que es óptimo y completo y la cantidad de estados explorados es tratable computacionalmente.
-El algoritmo de búsqueda de costo uniforme (UCS) es equivalente a BFS, pero como este problema no tiene costos, UCS conlleva una leve mayor complejidad temporal, ya que utiliza una cola por prioridad (implementada mediante un min-heap), y la comprobación y cálculo de costos.
+El algoritmo de búsqueda de costo uniforme (UCS) es equivalente a BFS, pero como este problema no tiene costos, UCS conlleva una leve mayor complejidad temporal, ya que utiliza una cola por prioridad (implementada mediante un min-heap), la comprobación y cálculo de costos.
