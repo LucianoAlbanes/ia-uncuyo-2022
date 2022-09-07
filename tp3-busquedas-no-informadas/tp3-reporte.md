@@ -33,9 +33,9 @@ En este gráfico, se analiza el tamaño de las soluciones (_solution_length_) en
 
 # Análisis de los resultados - Algoritmo óptimo para el problema
 Según los resultados obtenidos, se concluye lo siguiente:
-	- BFS y UCS actúan de forma idéntica, ya que el problema no tiene costos.
-	- DFS explora una cantidad de estados similar que BFS y UCS, pero es subóptimo al encontrar las soluciones.
-	- Respecto a DLS, solo encuentra soluciones cuando el objetivo esta a una distancia menor o igual a la dada por el límite. No presenta mejoras en el tamaño de la solución del problema respecto a BFS y UCS.
+- BFS y UCS actúan de forma idéntica, ya que el problema no tiene costos.
+- DFS explora una cantidad de estados similar que BFS y UCS, pero es subóptimo al encontrar las soluciones.
+- Respecto a DLS, solo encuentra soluciones cuando el objetivo esta a una distancia menor o igual a la dada por el límite. No presenta mejoras en el tamaño de la solución del problema respecto a BFS y UCS.
 
 Por lo tanto, la solución ideal el problema planteado es la búsqueda por profundidad (BFS). Esto se debe a que es óptimo y completo y la cantidad de estados explorados es tratable computacionalmente.
 El algoritmo de búsqueda de costo uniforme (UCS) es equivalente a BFS, pero como este problema no tiene costos, UCS conlleva una leve mayor complejidad temporal, ya que utiliza una cola por prioridad (implementada mediante un min-heap), y la comprobación y cálculo de costos.
