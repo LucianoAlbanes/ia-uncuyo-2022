@@ -14,29 +14,13 @@ class PriorityQueue:
 
     def pop(self):
         self.list.sort(key=lambda t: t[0])
-        return self.list.pop()
+        return self.list.pop(0)
 
     def __len__(self):
         return self.list.__len__()
 
 
-class Queue:
-    __slots__ = 'list'
-
-    def __init__(self):
-        self.list = deque()
-
-    def push(self, value):
-        self.list.append(value)
-
-    def pop(self):
-        return self.list.pop()
-
-    def __len__(self):
-        return self.list.__len__()
-
-
-class Stack:
+class Queue:    # FIFO
     __slots__ = 'list'
 
     def __init__(self):
@@ -47,6 +31,22 @@ class Stack:
 
     def pop(self):
         return self.list.popleft()
+
+    def __len__(self):
+        return self.list.__len__()
+
+
+class Stack:    # LIFO
+    __slots__ = 'list'
+
+    def __init__(self):
+        self.list = deque()
+
+    def push(self, value):
+        self.list.append(value)
+
+    def pop(self):
+        return self.list.pop()
 
     def __len__(self):
         return self.list.__len__()

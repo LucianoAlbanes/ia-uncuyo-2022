@@ -1,5 +1,6 @@
 import random
 from enum import Enum, auto
+
 from lib.Queues import Queue, Stack, PriorityQueue
 
 
@@ -118,7 +119,7 @@ class GoalBasedAgent2D:
     def _parse_path(self, discovered: dict) -> list:
         pos = self.env.goal_pos
         path = [pos]
-        while (pos := discovered[pos]) != self.env.init_pos:
+        while (pos := discovered[pos]) != self.env.init_pos and pos:
             path.append(pos)
 
         path.reverse()
@@ -269,3 +270,23 @@ class GoalAgentUCS(GoalBasedAgent2D):
 
         # Return failure -> empty path
         return []
+
+
+if __name__ == '__main__':
+    # Print grid and show agent's behavior.
+    env = Environment((10, 10),
+                      (random.randint(0, 10 - 1), random.randint(0, 10 - 1)),
+                      (random.randint(0, 10 - 1), random.randint(0, 10 - 1)),
+                      0.075)
+
+    print(env)
+
+    for agent_type in [GoalAgentBFS, GoalAgentDFS, GoalAgentDLS, GoalAgentUCS]:
+        if agent_type == GoalAgentDLS:
+            agent = agent_type(env, 3)
+        else:
+            agent = agent_type(env)
+
+        path = agent.think()
+
+        print(f'{agent_type.__name__}, solution_length={len(path)}, explored_states={agent.explored_states}, {path=}')
