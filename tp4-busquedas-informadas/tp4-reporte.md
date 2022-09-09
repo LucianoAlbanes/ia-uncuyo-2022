@@ -24,7 +24,7 @@ _*Se iteró una mayor cantidad de veces que lo solicitado para reducir el error 
 
 # Gráficos
 ## Boxplot - Estados explorados
-En el siguiente gráfico se observa la distribución de la cantidad de estados explorados (_explored_states_) por cada algoritmo (_algorithm_), distinguiendo cuando el objetivo fue alcanzado o no (_goal_reached_)
+En el siguiente gráfico se observa la distribución de la cantidad de estados explorados (_explored_states_) por cada algoritmo (_algorithm_), distinguiendo cuando el objetivo fue alcanzado o no (_goal_reached_).
 <img src="./attachments/boxplot-explored_states.svg">
 
 ## Boxplot - Tamaño de la solución
@@ -33,4 +33,4 @@ En este gráfico, se analiza el tamaño de las soluciones (_solution_length_) en
 <img src="./attachments/boxplot-solution_length-log.svg">
 
 # Análisis de los resultados - búsqueda informada contra no informada
-Según los resultados obtenidos, se aprecia una significativa diferencia en la cantidad de estados explorados a favor del algoritmo A*. Este es capaz de encontrar el camino óptimo de manera más eficiente.
+Según los resultados obtenidos, se aprecia una significativa diferencia en la cantidad de estados explorados a favor del algoritmo A*. Este es capaz de encontrar el camino óptimo (al igual que BFS y UCS), pero de forma más eficiente.
