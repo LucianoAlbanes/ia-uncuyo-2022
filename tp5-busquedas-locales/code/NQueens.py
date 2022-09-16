@@ -5,13 +5,12 @@ from BoardUtils import h, h_fast, board_to_str
 
 def hill_climbing(board: list, max_steps):
     """
-    Will
     :param board: The board to be analyzed, In-Place
     :param max_steps: The maximum amount of states to explore. (Verified once per iteration).
     """
     n = len(board)
     best_value = h(board)
-    h_history = [best_value]
+    h_history = [(0, best_value)]
     steps = 0
 
     # Hill climbing
@@ -39,7 +38,7 @@ def hill_climbing(board: list, max_steps):
         # Check results
         if better_neighbors:
             best_value, col, row = random.choice(better_neighbors)
-            h_history.append(best_value)
+            h_history.append((steps, best_value))
             board[col] = row
         else:
             break
@@ -48,14 +47,55 @@ def hill_climbing(board: list, max_steps):
     return best_value, steps, h_history
 
 
+def simulated_annealing(board: list, max_iterations):
+    """
+    :param board: The board to be analyzed, In-Place
+    :param max_iterations: The maximum amount of iterations to perform
+    """
+
+    n = len(board)
+    best_value = h(board)
+    h_history = [(0, best_value)]
+    iterations = 0
+
+    # Simulated Annealing
+    for time in range(max_iterations):
+        # Temp function
+        temp = 1/(time+1)
+
+        # Cant anneal
+        if temp == 0 or best_value == 0:
+            break
+
+        # Register iterations
+        iterations += 1
+
+        # Get random successor
+        col = random.randint(0, n-1)
+        row = random.randint(0, n-1)
+        value = h_fast(board, col, row, best_value)
+
+        # Get delta
+        delta = value - best_value
+
+        # Choose new value if improves OR probability
+        if delta < 0 or (random.random() <= math.exp(-delta / temp)):
+            best_value = value
+            board[col] = row
+            h_history.append((iterations, best_value))
+
+    # Return
+    return best_value, iterations, h_history
+
+
 if __name__ == '__main__':
     random.seed()
     sizes = [4, 8, 10]
-    algorithms = [hill_climbing]
+    algorithms = [hill_climbing, simulated_annealing]
 
     for algorithm in algorithms:
         print(f'~~~Algorithm: {algorithm.__name__}~~~')
         for size in sizes:
             board = random.sample(range(size), size)
-            best_h, steps, _ = algorithm(board, math.inf)
+            best_h, steps, hi = algorithm(board, size**10)
             print(f'{size= }, {best_h= }, {steps= }, {board= }\n{board_to_str(board)}\n')
