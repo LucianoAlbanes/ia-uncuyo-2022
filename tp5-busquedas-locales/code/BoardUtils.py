@@ -1,5 +1,6 @@
 import random
 
+
 def calc_main_diag(board, col):
     attacked_pairs = 0
     n = len(board)
@@ -9,6 +10,7 @@ def calc_main_diag(board, col):
             attacked_pairs += 1
 
     return attacked_pairs
+
 
 def calc_sec_diag(board, col):
     attacked_pairs = 0
@@ -20,6 +22,7 @@ def calc_sec_diag(board, col):
 
     return attacked_pairs
 
+
 def calc_rows(board, col):
     attacked_pairs = 0
     n = len(board)
@@ -28,6 +31,7 @@ def calc_rows(board, col):
         if board[col] == board[row]:
             attacked_pairs += 1
     return attacked_pairs
+
 
 def h(board):
     # This functions calculates the pairs of queens under attack ACROSS the board.
@@ -41,6 +45,7 @@ def h(board):
         attacked_pairs += calc_sec_diag(board, col)
 
     return attacked_pairs
+
 
 def h_fast(board, col, row, h_prev):
     # This function calculates the pairs on queens under attack across the board, after a given movement of ONE queen.
@@ -116,6 +121,7 @@ def board_to_str(board):
                 txt += '_ '
         txt += '\n'
     return txt
+
 
 def bruteforce_fast_h(size):
     count = 0

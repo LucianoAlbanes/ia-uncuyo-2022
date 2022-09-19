@@ -57,14 +57,15 @@ def simulated_annealing(board: list, max_iterations):
     best_value = h(board)
     h_history = [(0, best_value)]
     iterations = 0
+    memo = dict()
 
     # Simulated Annealing
     for time in range(max_iterations):
         # Temp function
         temp = 1/(time+1)
 
-        # Cant anneal
-        if temp == 0 or best_value == 0:
+        # Can't anneal
+        if best_value == 0:
             break
 
         # Register iterations
@@ -73,23 +74,29 @@ def simulated_annealing(board: list, max_iterations):
         # Get random successor
         col = random.randint(0, n-1)
         row = random.randint(0, n-1)
-        value = h_fast(board, col, row, best_value)
+        try:
+            value = memo[(col, row)]
+        except KeyError:
+            value = h_fast(board, col, row, best_value)
 
         # Get delta
         delta = value - best_value
 
         # Choose new value if improves OR probability
-        if delta < 0 or (random.random() <= math.exp(-delta / temp)):
+        if delta < 0 or (random.uniform(0, 1) <= math.exp(-delta / temp)):
             best_value = value
             board[col] = row
             h_history.append((iterations, best_value))
+            memo.clear()
+        else:
+            # Save memo
+            memo[(col, row)] = value
 
     # Return
     return best_value, iterations, h_history
 
 
 if __name__ == '__main__':
-    random.seed()
     sizes = [4, 8, 10]
     algorithms = [hill_climbing, simulated_annealing]
 
