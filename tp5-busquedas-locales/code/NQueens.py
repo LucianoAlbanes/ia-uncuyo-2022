@@ -47,22 +47,25 @@ def hill_climbing(board: list, max_steps):
     return best_value, steps, h_history
 
 
-def simulated_annealing(board: list, max_iterations):
+def simulated_annealing(board: list, max_iterations, init_temp=700, alpha=0.95):
     """
     :param board: The board to be analyzed, In-Place
     :param max_iterations: The maximum amount of iterations to perform
+    :param init_temp: The starting temperature. Default=700
+    :param alpha: Cooling factor. Must be smaller than 1. Default=0.95
     """
 
     n = len(board)
     best_value = h(board)
     h_history = [(0, best_value)]
+    temp = init_temp
     iterations = 0
     memo = dict()
 
     # Simulated Annealing
     for time in range(max_iterations):
-        # Temp function
-        temp = 1/(time+1)
+        # Temp function (geometric schedule)
+        temp *= alpha
 
         # Can't anneal
         if best_value == 0:
@@ -104,5 +107,5 @@ if __name__ == '__main__':
         print(f'~~~Algorithm: {algorithm.__name__}~~~')
         for size in sizes:
             board = random.sample(range(size), size)
-            best_h, steps, hi = algorithm(board, size**10)
+            best_h, steps, hi = algorithm(board, size**4)
             print(f'{size= }, {best_h= }, {steps= }, {board= }\n{board_to_str(board)}\n')
