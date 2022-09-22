@@ -90,7 +90,7 @@ def simulated_annealing(size: int, max_iterations: int, init_temp=700, alpha=0.9
     return board, best_value, iterations, h_history
 
 
-def genetic_algorithm(size: int, max_iterations: int, population_size=1000, mutation_rate=0.75):
+def genetic_algorithm(size: int, max_iterations: int, population_size=1000, mutation_rate=0.05):
     # Population must be divisible by 2
     if population_size % 2 != 0:
         population_size += 1
@@ -164,7 +164,7 @@ def genetic_algorithm(size: int, max_iterations: int, population_size=1000, muta
 
 
 if __name__ == '__main__':
-    sizes = [4, 8, 10, 30]
+    sizes = [4, 8, 10]
     algorithms = [hill_climbing, simulated_annealing, genetic_algorithm]
 
     for algorithm in algorithms:
