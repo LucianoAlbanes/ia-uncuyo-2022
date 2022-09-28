@@ -36,7 +36,7 @@ En el siguiente gráfico se observa el tiempo de ejecución (en milisegundos) (_
 <img src="./attachments/time_by_algorithm.svg">
 
 ## Boxplot - Mejor $h()$ alcanzado
-En el siguiente gráfico, se observa que tan buenas son las soluciones halladas (_best_h) por cada algoritmo (_algorithm_), diferenciando entre los distintos tamaños de los tableros (_size_).
+En el siguiente gráfico, se observa que tan buenas son las soluciones halladas (_best_h_) por cada algoritmo (_algorithm_), diferenciando entre los distintos tamaños de los tableros (_size_).
 <img src="./attachments/h_by_algorithm.svg">
 
 # Comportamiento de $h()$
@@ -60,7 +60,7 @@ A continuación, se mencionan algunos detalles de relevancia de como fueron impl
 - Se implementó la función $h$ de manera que pueda reutilizar los resultados de $h$ anteriores y así evitar recalcular ataques entre reinas que no se vieron modificadas después de un movimiento dado.
 
 ## Simulated annealing
-- El enfriamiento está modelado mediante una progresión geométrica. ($T_{t+1} = \alpha*T_{t}$).
+- El enfriamiento está modelado mediante una progresión geométrica. ( $T_{t+1} = \alpha*T_{t}$ ).
 - Se utilizaron los parámetros: $T_{0} = 700$ y $\alpha = 0.95$.
 - También se aprovechó de la implementación optimizada de $h$.
 
@@ -68,5 +68,5 @@ A continuación, se mencionan algunos detalles de relevancia de como fueron impl
 - El tamaño de la población es constante y es $n=50$.
 - El remplazo se lleva a cabo manteniendo los 20 mejores individuos del conjunto conformado por la población anterior y la nueva.
 - Los padres se obtienen por selección proporcional de acuerdo a su fitness.
-- La probabilidad de mutación se limita a un gen por cromosoma y es $m\_rate=0.05$.
+- La probabilidad de mutación se limita a un gen por cromosoma y es $P(m)=0.05$.
 - El crossover se realiza mediante un cruce de orden (1).
