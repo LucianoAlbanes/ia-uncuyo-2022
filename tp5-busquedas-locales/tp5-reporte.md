@@ -66,7 +66,7 @@ A continuación, se mencionan algunos detalles de relevancia de como fueron impl
 
 ## Algoritmo genético
 - El tamaño de la población es constante y es $n=50$.
-- El remplazo se lleva a cabo manteniendo los 20 mejores individuos del conjunto conformado por la población anterior y la nueva.
+- El remplazo se lleva a cabo manteniendo los mejores individuos del conjunto conformado por la población anterior y la nueva.
 - Los padres se obtienen por selección proporcional de acuerdo a su fitness.
 - La probabilidad de mutación se limita a un gen por cromosoma y es $P(m)=0.05$.
 - El crossover se realiza mediante un cruce de orden (1).
