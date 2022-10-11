@@ -1,0 +1,41 @@
+---
+title: "Stave bending experiment March 18"
+author: "Luciano Albanes"
+date: "2022-10-10"
+output: html_document
+---
+
+# Imports
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+# Step 1 - Load
+```{r}
+tags <- read_xlsx('./Stave bending experiment March 18.xlsx', sheet=1)
+spectrum <- read_xlsx('./Stave bending experiment March 18.xlsx', sheet=2)
+```
+
+# Step 2 - Tidy
+```{r}
+# Tidy spectrum
+spectrum_tidy <- spectrum |>
+  select(!starts_with('...')) |> # redundant wavelengths
+  pivot_longer(!`Wavelength (nm)`, names_to = 'Sample ID', values_to = 'Measure') |>
+  pivot_wider(names_from = `Wavelength (nm)`, values_from = Measure) |>
+  rename_with({function (x) round(as.numeric(x))}, !`Sample ID`)
+
+spectrum_tidy
+```
+
+# Step 3 - Join tibbles
+```{r}
+result <- left_join(tags, spectrum_tidy)
+result
+```
+
+# Step 4 - Export as csv
+```{r}
+write_csv(result, './Stave bending experiment March 18.csv')
+```
