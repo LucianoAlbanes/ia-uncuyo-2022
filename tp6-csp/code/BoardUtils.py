@@ -123,7 +123,7 @@ def board_to_str(board):
     return txt
 
 
-def isConsistent(board: [int | None], col: int, row: int) -> bool:
+def is_consistent(board: [int | None], col: int, row: int) -> bool:
     """
     Checks if a given board will remain consistent after placing a queen in a given column and row.
     Only checks inconsistency with the values at the right starting from the given indexes, the remaining left values
@@ -174,3 +174,102 @@ def bruteforce_fast_h(size):
 
     print(board_to_str(board))
     print(f'{h(board)=}, {fast=}')
+
+
+class Board:
+    def __init__(self, size):
+        self.board = [None] * size
+        self.domains = [[0 for _ in range(size)] for _ in range(size)]
+
+    def __getitem__(self, item):
+        return self.board[item]
+
+    def __setitem__(self, key, value):
+        # Fix domains
+        if value is None:   # Emptying
+            self.update_domain(key, self.board[key], inc=-1)
+            self.board[key] = value
+            return 0
+
+        elif self.board[key] is not None:   # Overriding
+            self.update_domain(key, self.board[key], inc=-1)
+
+        # Assign and update
+        self.board[key] = value
+        self.update_domain(key, value)
+
+    def update_domain(self, key, value, inc=1):
+        n = len(self.board)
+
+        # Row
+        for domain in self.domains:
+            domain[value] += inc
+
+        # Main diagonal
+        dc = key
+        dr = value
+
+        if dc > dr:
+            dc -= dr
+            dr = 0
+        else:
+            dr -= dc
+            dc = 0
+
+        d = max(dc, dr)
+        for i in range(n - d):
+            self.domains[dc + i][dr + i] += inc
+
+        # Secondary diagonal
+        dr = value - (n - 1 - key)
+        dc = n - 1
+
+        for i in range(max(0, -dr), n):
+            if dr+i == n:
+                break
+            self.domains[dc-i][dr+i] += inc
+
+        # Fix self domain over-assignation
+        self.domains[key][value] -= 2 * inc
+
+    def __get__(self, instance, owner):
+        return self.board
+
+    def __len__(self):
+        return len(self.board)
+
+    def __repr__(self):
+        return repr(self.board)
+
+
+def print_domains(bo):
+    size = len(bo.domains)
+
+    for col in range(size):
+        for row in range(size):
+            if bo.board[row] == col:
+                print(f'\033[91m{bo.domains[row][col]}\033[00m ', end='')
+            elif bo.domains[row][col] == 0:
+                print(f'{bo.domains[row][col]} ', end='')
+            else:
+                print(f'\033[96m{bo.domains[row][col]}\033[00m ', end='')
+
+        print("")
+    print("\n")
+
+
+def main():
+    size = 10
+    B = Board(size)
+    B[2] = 1
+    B[2] = None
+
+
+    print(B)
+
+    print_domains(B)
+
+
+if __name__ == '__main__':
+    main()
+
