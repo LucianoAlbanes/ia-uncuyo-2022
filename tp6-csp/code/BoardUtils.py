@@ -1,4 +1,5 @@
 import random
+import numpy
 
 
 def calc_main_diag(board, col):
@@ -186,12 +187,12 @@ class Board:
 
     def __setitem__(self, key, value):
         # Fix domains
-        if value is None:   # Emptying
+        if value is None:  # Emptying
             self.update_domain(key, self.board[key], inc=-1)
             self.board[key] = value
             return 0
 
-        elif self.board[key] is not None:   # Overriding
+        elif self.board[key] is not None:  # Overriding
             self.update_domain(key, self.board[key], inc=-1)
 
         # Assign and update
@@ -225,9 +226,9 @@ class Board:
         dc = n - 1
 
         for i in range(max(0, -dr), n):
-            if dr+i == n:
+            if dr + i == n:
                 break
-            self.domains[dc-i][dr+i] += inc
+            self.domains[dc - i][dr + i] += inc
 
         # Fix self domain over-assignation
         self.domains[key][value] -= 2 * inc
@@ -258,18 +259,36 @@ def print_domains(bo):
     print("\n")
 
 
+def mrv_sort(board: Board):
+    zeros = list(map(count_zeros, board.domains))
+
+    min_idx = None
+    min_value = None
+
+    for i in range(len(board)):
+        if board[i] is None and (min_idx is None or min_value > zeros[i]):
+            min_idx = i
+            min_value = zeros[i]
+
+    return min_idx
+
+
+def count_zeros(l: list):
+    return sum(map(lambda x: (x == 0), l))
+
+
 def main():
-    size = 10
+    size = 5
     B = Board(size)
     B[2] = 1
-    B[2] = None
-
-
-    print(B)
+    B[1] = 4
+    B[3] = 3
+    B[0] = 2
+    B[4] = 0
 
     print_domains(B)
+    print(mrv_sort(B))
 
 
 if __name__ == '__main__':
     main()
-
