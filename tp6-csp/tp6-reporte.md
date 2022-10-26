@@ -1,6 +1,8 @@
 Constraint Satisfaction Problems
 ===
-# 1. Describir en detalle una formulación CSP para el Sudoku.
+# Actividad 1
+Describir en detalle una formulación CSP para el Sudoku.
+---
 
 El Sudoku es un puzzle conformado por un tablero de $9×9$ celdas ( $81$ casilleros) dividida en subcuadrículas de $3×3$. Algunos de los casilleros ya se encuentran con valores asignados y será nuestra tarea completar los restantes casilleros de forma que se satisfagan ciertas restricciones:
 	1. Un número no se puede repetír en una misma fila.
@@ -38,7 +40,9 @@ Este problema se puede tratar mediante algorítmos de resolución de CSP. La for
 
 Respecto al algoritmo a utilizar, sería una implementación basada en backtracking. Donde las variables se seleccionan mediante MRV (variable mas restringida), los valores mediante LCV (valor menos restringido), y antes de cada asignación, se realizará un chequeo hacia adelante mediante MAC (AC-3).
 
-# 2. Utilizar el algoritmo AC-3 para demostrar que la arco consistencia puede detectar la inconsistencia de la asignación parcial $\{WA=red, V=blue\}$ para el problema del colorar el mapa de Australia *(Figura 5.1 AIMA 2da edición)*.
+# Actividad 2
+Utilizar el algoritmo AC-3 para demostrar que la arco consistencia puede detectar la inconsistencia de la asignación parcial $\{WA=red, V=blue\}$ para el problema del colorar el mapa de Australia *(Figura 5.1 AIMA 2da edición)*.
+---
 
 ![Figura 5.1](./attachments/fig5-1.png)
 
@@ -280,3 +284,106 @@ Q(33). = [(NT-Q), (NSW-Q), (Q-NSW), (V-NSW), (NT-Q), (SA-Q)]
 
 
 Por lo tanto, se concluye que la asignación inicial *WA=red, V=blue es inconsistente*.
+
+# Actividad 3
+Cuál es la complejidad en el peor caso cuando se ejecuta AC-3 en un árbol estructurado CSP. (i.e. Cuando el grafo de restricciones forma un árbol: cualquiera dos variables están relacionadas por a lo sumo un camino).
+---
+
+## Definiciones
+
+### Árbol estructurado CSP
+Un grafo de restricciones CSP es un árbol estructurado CSP cuando para todo par de variables $X_i$ $X_j$ pertenecientes al mismo CSP, existe un solo camino que las conecta.
+
+### AC-3 Pseudocódigo
+```
+function AC-3(csp) # returns false if an inconsistency is found and true otherwise
+	queue ← a queue of arcs, initially all the arcs in csp
+	while queue is not empty do
+		(Xi , Xj) ← POP(queue)
+		if REVISE(csp, Xi , Xj) then
+			if size of Di = 0 then return false
+			for each Xk in Xi.NEIGHBORS - {Xj} do
+				add (Xk , Xi) to queue
+	return true
+
+function REVISE(csp, Xi , Xj)  # returns true iff we revise the domain of Xi
+	revised ← false
+	for each x in Di do
+		if no value y in Dj allows (x,y) to satisfy the constraint between Xi and Xj then
+		delete x from Di
+		revised ← true
+	return revised
+```
+
+### Elementos
+$n$ = número de variables
+$e$ = número de árcos
+$d$ = tamaño del mayor dominio de las variables
+
+*Como el CSP está estructurado como árbol, entonces $e=(n-1)$*
+
+## Análisis de complejidad
+AC-3 no tiene en consideración cuando el problema dado se trata de un CSP estructurado en forma de árbol, por lo que su ejecución será la misma que si se tratase de un CSP en forma de grafo.
+
+- Comienza inicializando la cola con 2$e$ árcos.
+- Posteriormente, extrae cada arco y ejecuta el método `REVISE`, este con una complejidad $d^2$.
+- Y, cuando se detecte un valor inconsistente y se deba restringir el dominio en una variable, se deberá agregar a la cola el resto de las variables vecinas para ser analizadas nuevamente. Esto podría ocurrir como mucho $d$ veces en cada arco del CSP.
+
+Por lo tanto, será necesario llamar $2ed$ veces a `REVISE`, que tiene una complejidad $d^2$, multiplicando se obtiene $2ed^3$, es decir $O(ed^3)$.
+
+
+# Actividad 4
+
+
+# Actividad 5
+
+
+# Actividad 6
+Implementar una solución al problema de las n-reinas utilizando una formulación CSP. Se deberá implementar mediante backtracking y encadenamiento hacia adelante.
+---
+## Detalle sobre la implementación y el análisis
+En la implementación de la solución mediante encadenamineto hacia adelante, se implementaron dos versiones, una de ellas posee la heurísitca sobre variables MRV (Most Restricted Value).
+
+Además, se agregó el tamaño $20$ para poder apreciar mejor la evolución del tiempo empleado por algoritmo.
+
+## Tiempo de ejecución
+Se realizaron simulaciones para hallar tableros soluciones al problema de las $n$ reinas formulando el problema como un CSP. La configuración utilizada es la siguiente:
+- _algoritmos:_ [Backtracking, Encadenamiento hacia adelante, Encadenamiento hacia adelante con mrv]
+- _tamaños:_ $[4, 8, 10, 12, 15, 20]$
+- _cantidad de iteraciones:_ $30$
+
+## Análisis por algorítmo y tamaño
+|algorithm          |size|time_ms_avg|time_ms_std|iter_avg|iter_std|
+|-------------------|----|-----------|-----------|--------|--------|
+|backtracking       |4   |0.03       |0.01       |8       |0       |
+|backtracking       |8   |0.33       |0.18       |113     |0       |
+|backtracking       |10  |0.35       |0.07       |102     |0       |
+|backtracking       |12  |1.34       |0.23       |261     |0       |
+|backtracking       |15  |10.19      |1.38       |1359    |0       |
+|backtracking       |20  |2437.02    |237.16     |199635  |0       |
+|forwardchecking    |4   |0.10       |0.19       |8       |0       |
+|forwardchecking    |8   |0.59       |0.11       |88      |0       |
+|forwardchecking    |10  |0.63       |0.12       |83      |0       |
+|forwardchecking    |12  |1.80       |0.26       |193     |0       |
+|forwardchecking    |15  |12.86      |0.41       |1026    |0       |
+|forwardchecking    |20  |2128.79    |278.06     |145151  |0       |
+|forwardchecking_mrv|4   |0.13       |0.23       |8       |0       |
+|forwardchecking_mrv|8   |1.09       |0.53       |75      |0       |
+|forwardchecking_mrv|10  |0.48       |0.10       |35      |0       |
+|forwardchecking_mrv|12  |2.89       |0.47       |153     |0       |
+|forwardchecking_mrv|15  |1.03       |0.11       |34      |0       |
+|forwardchecking_mrv|20  |4.95       |1.40       |145     |0       |
+
+## Boxplot - Tiempo de ejecución
+En el siguiente gráfico se observa el tiempo de ejecución (en milisegundos) (_time_ms_) por cada algoritmo (_algorithm_), diferenciando entre los distintos tamaños de los tableros (_size_).
+<img src="./attachments/time_by_algorithm.svg">
+
+## Análisis de los resultados
+Según las simulaciónes, backtracking es el mas rápido cuando el tamaño de la tabla es pequeño, esto debido a su simplicidad, pero a medida que este tamaño crece, el encadenamiento hacia adelante resulta una mejor opción.
+
+Ahora bien, si se hace una pequeña modificación en el encadenamiento hacia adelante, podemos aprovechar el conocimiento de los dominios de cada variable para implementar MRV y asi obtener tiempos mucho mas chicos.
+
+## Lineplot - Tiempo de ejecución
+En los siguientes gráficos se observa el tiempo de ejecución (en milisegundos) (_time_ms_) por cada algoritmo (_algorithm_), a medida que el tamaño del tablero aumenta ($size$). (linear y logarítmica)
+<img src="./attachments/time_by_size_lin.svg">
+<img src="./attachments/time_by_size_log.svg">
