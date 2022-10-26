@@ -287,7 +287,6 @@ Por lo tanto, se concluye que la asignación inicial *WA=red, V=blue es inconsis
 
 # Actividad 3
 Cuál es la complejidad en el peor caso cuando se ejecuta AC-3 en un árbol estructurado CSP. (i.e. Cuando el grafo de restricciones forma un árbol: cualquiera dos variables están relacionadas por a lo sumo un camino).
----
 
 ## Definiciones
 
@@ -316,8 +315,11 @@ function REVISE(csp, Xi , Xj)  # returns true iff we revise the domain of Xi
 ```
 
 ### Elementos
+
 $n$ = número de variables
+
 $e$ = número de árcos
+
 $d$ = tamaño del mayor dominio de las variables
 
 *Como el CSP está estructurado como árbol, entonces $e=(n-1)$*
@@ -340,7 +342,7 @@ Por lo tanto, será necesario llamar $2ed$ veces a `REVISE`, que tiene una compl
 
 # Actividad 6
 Implementar una solución al problema de las n-reinas utilizando una formulación CSP. Se deberá implementar mediante backtracking y encadenamiento hacia adelante.
----
+
 ## Detalle sobre la implementación y el análisis
 En la implementación de la solución mediante encadenamineto hacia adelante, se implementaron dos versiones, una de ellas posee la heurísitca sobre variables MRV (Most Restricted Value).
 
@@ -384,6 +386,7 @@ Según las simulaciónes, backtracking es el mas rápido cuando el tamaño de la
 Ahora bien, si se hace una pequeña modificación en el encadenamiento hacia adelante, podemos aprovechar el conocimiento de los dominios de cada variable para implementar MRV y asi obtener tiempos mucho mas chicos.
 
 ## Lineplot - Tiempo de ejecución
-En los siguientes gráficos se observa el tiempo de ejecución (en milisegundos) (_time_ms_) por cada algoritmo (_algorithm_), a medida que el tamaño del tablero aumenta ($size$). (linear y logarítmica)
+En los siguientes gráficos se observa el tiempo de ejecución (en milisegundos) (_time_ms_) por cada algoritmo (_algorithm_), a medida que el tamaño del tablero aumenta (_size_). (linear y logarítmica)
+
 <img src="./attachments/time_by_size_lin.svg">
 <img src="./attachments/time_by_size_log.svg">
