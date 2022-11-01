@@ -54,7 +54,9 @@ En cambio, los métodos no-paramétricos (flexibles) se utilizan cuando se asume
 
 # Actividad 7
 The table below provides a training data set containing six observations, three predictors, and one qualitative response variable.
-![](figE2A7.png)
+
+![figE2A7](./attachments/figE2A7.png)
+
 Suppose we wish to use this data set to make a prediction for $Y$ when $X1 = X2 = X3 = 0$ using K-nearest neighbors.
 
 ## a. Compute the Euclidean distance between each observation and the test point, $X1 = X2 = X3 = 0$.
