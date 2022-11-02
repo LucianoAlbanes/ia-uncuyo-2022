@@ -35,3 +35,13 @@ Se utilizó un ancho de bins igual a 10, ya que se observa en el dataset que las
 En cada barra, se coloreó según la cantidad de árboles con inclinación peligrosa que conforman a la misma.
 
 <img src="./attachments/hist_circ_tronco_by_inc_peligrosa.svg">
+
+## Variable categórica de nombre circ_tronco_cm_cat
+Para asignar la categoría a cada observación, el criterio de corte utilizado fue en calcular los cuartiles del dataset para confeccionar la siguiente tabla:
+
+| Categoría | Valor  |
+|-----------|--------|
+| Muy alto  | >= 157 |
+| Alto      | >= 110 |
+| Medio     | >=  58 |
+| Bajo      | >=   0 |
