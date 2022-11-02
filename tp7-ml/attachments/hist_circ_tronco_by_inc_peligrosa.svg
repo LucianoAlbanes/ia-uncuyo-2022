@@ -175,13 +175,13 @@
 <text x='493.66' y='303.17' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='15.10px' lengthAdjust='spacingAndGlyphs'>500</text>
 <text x='281.65' y='315.88' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='77.18px' lengthAdjust='spacingAndGlyphs'>circ_tronco_cm</text>
 <text transform='translate(13.33,148.72) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='29.51px' lengthAdjust='spacingAndGlyphs'>count</text>
-<rect x='432.54' y='3.38' width='78.81' height='61.50' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='438.02' y='18.04' style='font-size: 11.00px; font-family: "Arial";' textLength='67.85px' lengthAdjust='spacingAndGlyphs'>inc_peligrosa</text>
-<rect x='438.02' y='24.84' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='438.73' y='25.55' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: #2F4F4F; stroke-linecap: square; stroke-linejoin: miter; fill: #458B00;' />
-<rect x='438.02' y='42.12' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<rect x='438.73' y='42.83' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: #2F4F4F; stroke-linecap: square; stroke-linejoin: miter; fill: #FF8C00;' />
-<text x='460.78' y='36.62' style='font-size: 8.80px; font-family: "Arial";' textLength='5.03px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='460.78' y='53.90' style='font-size: 8.80px; font-family: "Arial";' textLength='5.03px' lengthAdjust='spacingAndGlyphs'>1</text>
+<rect x='388.64' y='11.97' width='119.04' height='61.50' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='394.12' y='26.63' style='font-size: 11.00px; font-family: "Arial";' textLength='108.08px' lengthAdjust='spacingAndGlyphs'>inclinacion_peligrosa</text>
+<rect x='394.12' y='33.43' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='394.83' y='34.14' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: #2F4F4F; stroke-linecap: square; stroke-linejoin: miter; fill: #458B00;' />
+<rect x='394.12' y='50.71' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='394.83' y='51.42' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: #2F4F4F; stroke-linecap: square; stroke-linejoin: miter; fill: #FF8C00;' />
+<text x='416.88' y='45.21' style='font-size: 8.80px; font-family: "Arial";' textLength='5.03px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='416.88' y='62.49' style='font-size: 8.80px; font-family: "Arial";' textLength='5.03px' lengthAdjust='spacingAndGlyphs'>1</text>
 </g>
 </svg>
