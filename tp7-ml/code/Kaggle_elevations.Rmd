@@ -1,0 +1,106 @@
+---
+title: "Kaggle Arbolado Público Ciudad MZA"
+author: "Luciano Albanes"
+date: '2022-11-04'
+output: html_document
+---
+
+```{r}
+library(readr)
+library(tidyverse)
+library(caret)
+library(ROSE)
+library(randomForest)
+```
+
+
+# CONFIG
+```{r}
+species_threshold <- 3
+do_analysis <- FALSE
+
+
+train_file <- './dataset/train_balanced_both_elevation.csv'
+test_file <- './dataset/arbolado-mza-dataset-test_elevation.csv'
+
+
+#train_file <- './arbolado-publico-mendoza-2021-train.csv'
+#test_file <- './arbolado-publico-mendoza-2021-validation.csv'
+
+```
+
+
+# TRAIN
+## Prepare dataset
+```{r}
+# Load full dataset
+train <- read_csv(train_file)
+train$inclinacion_peligrosa <- as.factor(train$inclinacion_peligrosa)
+
+# Define train formula
+train_formula <- formula(inclinacion_peligrosa~altura+
+                                              circ_tronco_cm+
+                                              lat+
+                                              long+
+                                              elevation+
+                                              seccion+
+                                              especie)
+
+
+# Get species to remove
+species_to_remove <- train |>
+  group_by(especie) |>
+  summarise(n=n()) |>
+  filter(n<species_threshold) |>
+  select(especie)
+
+# Remove
+train <- train |>
+  filter(!(especie %in% species_to_remove[[1]]))
+
+# Shuffle
+train <- train[sample(1:nrow(train)),]
+
+train
+```
+
+## Train model - (Random forest)
+
+```{r}
+# Train
+tree_model <- randomForest(train_formula, data=train)
+```
+
+
+# PREDICT
+## Load test data
+```{r}
+# Load dataset test
+test <- read_csv(test_file)
+
+# Get predictions
+predictions <- as.factor(predict(tree_model, test, type='class'))
+```
+
+
+# Print Confussion Matrix and AUC
+```{r}
+if (do_analysis) {
+  expected  <- as.factor(test$inclinacion_peligrosa)
+  # AUC ROC is Balanced Accurracy
+  confusionMatrix(data=predictions, reference=expected, positive = '1')
+}
+```
+
+
+
+# Save report
+```{r}
+test <- test |>
+  mutate(inclinacion_peligrosa = predictions) |>
+  mutate(ID=id, .before='inclinacion_peligrosa') |>
+  select(ID, inclinacion_peligrosa)
+  
+write_csv(test, 'report(th3-bth-e).csv')
+```
+
