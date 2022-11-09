@@ -46,6 +46,8 @@ train_formula <- formula(inclinacion_peligrosa~altura+
                                               seccion+
                                               especie)
 
+# Over and sub sampling (if required. Train datasets with elevation are already balanced)
+#train <- ovun.sample(train_formula, data=train, method = "both")$data
 
 # Get species to remove
 species_to_remove <- train |>
