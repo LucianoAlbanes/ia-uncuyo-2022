@@ -1,19 +1,46 @@
 HAILML: Predicción de tormentas de granizo utilizando machine learning
 ===
+Luciano Joaquín Albanes
 
-# Descripción
+## Descripción
 Este proyecto busca poder predecir que tan probable es que ocurra una tormenta con precipitación de granizo en una determinada zona geográfica utilizando aprendizaje de máquinas (machine learning).
 
+Resulta interesante estudiar este fenómeno, ya que causa grandes perdidas a nivel económico al dañar la producción agrícola en sectores cultivados; o bienes materiales como construcciones, vehículos, herramientas, etc que se encuentren a la intemperie al momento de ocurrir estos fenómenos. Poder predecir este tipo de tormenta implicaría una reducción en estas pérdidas.
+
+## Objetivos
+- Interiorizarse sobre el funcionamiento y procesos que ocurren en la atmósfera, para poder lograr una mayor comprensión de ellos.
+- Será necesario realizar un estudio de las variables que influyen en la formación de granizo y como llevar a cabo su representación en los datasets.
+ - Buscar fuentes de datos y recopilar los mismos para construir los datasets de entrenamiento.
+ - Implementar el modelo mediante el algoritmo de clasificación random forest, _y de forma tentativa una implementación mediante deep learning._
+
+## Limitaciones
 El tiempo meteorológico tiene un comportamiento caótico, por lo que las predicciones del mismo no gozan de gran precisión en el mediano y largo plazo. Por ello, el desarrollo de la solución se concentrará en el pronóstico intradiario, con posibilidad de extenderse hasta una semana por delante con la condición de que las predicciones sean útiles.
 
-Será necesario realizar un estudio de las variables relevantes que influyen en la formación de granizo y como representarlas en el dataset. Además, habrá que recopilar los mismos de múltiples fuentes (con la esperanza de que estén disponibles).
+La zona geográfica con la que se comenzará a trabajar es el Oasis Norte de la Provincia de Mendoza, Argentina; pero como aún no se sabe con certeza las variables y disponibilidad de las mismas, podría llegar a analizarse otra zona geográfica donde también occuriese este fenómeno meteorológico.
 
-La zona geográfica con la que se comenzará a trabajar es el Oasis Norte de la Provincia de Mendoza, Argentina; pero como aún no se sabe con certeza las variables y disponibilidad de las mismas, podría llegar a analizarse otra zona geográfica donde también ocurra este fenómeno meteorológico.
+## Métrica
+Las predicciones del modelo se evaluarán como si se tratase de un problema de clasificación (si ocurrió una tormenta con caída de granizo o no). Se generarán dos dataset: uno de entrenamiento y otro de verificación, con los cuales se podrán obtener métricas para evaluar los modelos.
 
-Las predicciones del modelo se evaluarán como si se tratase de un problema de clasificación (si ocurrió una tormenta con caída de granizo o no), se generarán dos dataset: uno de entrenamiento y otro de verificación, con los cuales se podrán obtener diversas métricas para evaluar los modelos.
+Como se espera que los datasets se encuentren desbalanceados, debido a que las ocurrencias de tormentas con granizo son la minoría; una buena métrica seria el área bajo la curva característica operativa del receptor (AUC ROC). Esta es una medida estadística que podemos utilizar para evaluar las predicciones del modelo utilizando un marco probabilístico.
 
-Para implementar el modelo se utilizará el algoritmo de clasificación random forest, y de forma tentativa una implementación mediante deep learning.
+De forma breve, la curva ROC muestra la relación entre la tasa de falsos positivos y la tasa de 
+verdaderos positivos para diferentes umbrales de probabilidad de las predicciones del modelo.
 
-# Justificación
+![ROC](https://upload.wikimedia.org/wikipedia/commons/1/13/Roc_curve.svg)
+
+El objetivo es obtener un modelo que maximice la medida AUC ROC.
+
+## Justificación
 Si bien existen y se utilizan actualmente los modelos numéricos de predicción meteorológica, estos son muy complejos y costosos computacionalmente, por lo que lograr una buena estimación mediante técnicas de machine learning sería positivo. Además, existe una esperanza de que utilizando técnicas de aprendizaje profundo (deep learning) se pueda "hallar" patrones no considerados anteriormente que permitan mejoren las predicciones.
 
+## Fuentes de datos
+Asumiendo la viabilidad de realizar este proyecto enfocado en la Provincia de Mendoza, en el [sito web del Servicio Meteorológico Nacional](https://www.smn.gob.ar/descarga-de-datos) se encuentran disponibles las mediciones de datos meteorológicos de varias estaciones ubicadas en la provincia (datos de temperatura, presión, viento y humedad), estos con una frecuencia de una medición por hora, hay disponibilidad de datos desde noviembre del 2017.
+
+También podrían resultar de utilidad mediciones de radares meteorológicos, pronósticos, artículos periodísticos y demás variables por definir. En estos casos será necesario encontrar una fuente de estos datos y agregarlos al dataset.
+
+## Bibliografía relacionada
+[Gagne, D.J., McGovern, A., Brotzge, J.A., Coniglio, M., Correia, J., & Xue, M. (2015). Day-Ahead Hail Prediction Integrating Machine Learning with Storm-Scale Numerical Weather Models. _AAAI_.](https://www.researchgate.net/publication/283796331_Day-Ahead_Hail_Prediction_Integrating_Machine_Learning_with_Storm-Scale_Numerical_Weather_Models)
+
+[Gagne, D. J., II, McGovern, A., Haupt, S. E., Sobash, R. A., Williams, J. K., & Xue, M. (2017). Storm-Based Probabilistic Hail Forecasting with Machine Learning Applied to Convection-Allowing Ensembles, _Weather and Forecasting_, _32_(5), 1819-1840.](https://journals.ametsoc.org/view/journals/wefo/32/5/waf-d-17-0010_1.xml)
+
+[Herrera, R. G. (2000). Distribución espacial del granizo en el norte de la provincia de Mendoza, Argentina. Scripta Nova. Revista Electrónica de Geografía y Ciencias Sociales, 4(55-78), UB.](https://revistes.ub.edu/index.php/ScriptaNova/article/view/199)
