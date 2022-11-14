@@ -38,6 +38,22 @@ Asumiendo la viabilidad de realizar este proyecto enfocado en la Provincia de Me
 
 También podrían resultar de utilidad mediciones de radares meteorológicos, pronósticos, artículos periodísticos y demás variables por definir. En estos casos será necesario encontrar una fuente de estos datos y agregarlos al dataset.
 
+## Listado de actividades a realizar
+1. Analizar la bibliografía relacionada en profundidad, para logar un entendimiento sobre el fenómeno en estudio. [7 días]
+2. Buscar recursos donde poder extraer las diversas variables meteorológicas, descargarlas y representarlas en el dataset. [5 días]
+3. Implementar y ajustar el modelo de predicción de tormentas. [5 días]
+4. (Tentativa) Implementar y ajustar el modelo de predicción de tormentas usando TensorFlow. [5 días]
+5. Obtener y analizar los resultados y métricas de los modelos. [2 días]
+7. Escritura de informe final. [7 días]
+
+## Actividades tentativas
+Tentativamente, se implementará y analizará una solución basada en deep learning, utilizando el framework TensorFlow.
+Esto conllevaría un estudio previo de los conceptos [1 día], aprender a utilizar el framework [2 días], e implementar y ajustar el modelo [3 días].
+
+## Cronograma estimado de actividades
+
+![Gantt](./attachments/gantt.png)
+
 ## Bibliografía relacionada
 [Gagne, D.J., McGovern, A., Brotzge, J.A., Coniglio, M., Correia, J., & Xue, M. (2015). Day-Ahead Hail Prediction Integrating Machine Learning with Storm-Scale Numerical Weather Models. _AAAI_.](https://www.researchgate.net/publication/283796331_Day-Ahead_Hail_Prediction_Integrating_Machine_Learning_with_Storm-Scale_Numerical_Weather_Models)
 
