@@ -60,4 +60,3 @@ Esto conllevaría un estudio previo de los conceptos [1 día], aprender a utiliz
 [Gagne, D. J., II, McGovern, A., Haupt, S. E., Sobash, R. A., Williams, J. K., & Xue, M. (2017). Storm-Based Probabilistic Hail Forecasting with Machine Learning Applied to Convection-Allowing Ensembles, _Weather and Forecasting_, _32_(5), 1819-1840.](https://journals.ametsoc.org/view/journals/wefo/32/5/waf-d-17-0010_1.xml)
 
 [Herrera, R. G. (2000). Distribución espacial del granizo en el norte de la provincia de Mendoza, Argentina. Scripta Nova. Revista Electrónica de Geografía y Ciencias Sociales, 4(55-78), UB.](https://revistes.ub.edu/index.php/ScriptaNova/article/view/199)
-
