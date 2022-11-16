@@ -79,3 +79,4 @@ cross_validation <- function(df, k_folds) {
 | Precision   | 0.7175119 | 0.01072502  |
 | Sensitivity | 0.6422259 | 0.006676295 |
 | Specificity | 0.7434172 | 0.01255439  |
+
