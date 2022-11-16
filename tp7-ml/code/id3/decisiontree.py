@@ -1,6 +1,8 @@
 from copy import copy
 from math import log2
+
 import pandas as pd
+from sklearn import metrics
 
 
 class Node:
@@ -25,8 +27,23 @@ class DecisionTreeClassifier:
             parent_examples=None
         )
 
-    def predict(self):
-        raise NotImplementedError
+    def predict(self, data: pd.DataFrame):
+        # Check if the classifier was fitted.
+        if self.tree is None:
+            raise Exception('Fit the classifier first!')
+
+        # Travel the tree
+        result = None
+        current = self.tree
+        while result is None:
+            value = data[current.label].values[0]
+
+            if current.children[value] in {True, False}:
+                result = current.children[value]
+            else:
+                current = current.children[value]
+
+        return result
 
 
 def learn_decision_tree(attributes: list,
@@ -115,10 +132,10 @@ def print_tree(node: Node, depth=0, prev=None):
     print(f'{" " * depth} [{node.label}]')
     for key, val in zip(node.children.keys(), node.children.values()):
         if isinstance(val, Node):
-            print(f'{" " * (depth+2)} [{key}]')
-            print_tree(val, depth+4, prev=key)
+            print(f'{" " * (depth + 2)} [{key}]')
+            print_tree(val, depth + 4, prev=key)
         else:
-            print(f'{" " * (depth+2)} [{key}, {val}]')
+            print(f'{" " * (depth + 2)} [{key}, {val}]')
 
 
 def main():
@@ -136,6 +153,17 @@ def main():
 
     # Print class prediction tree
     print_tree(dtc.tree)
+
+    # Predict with data and show confusion matrix
+    reference = data['play'].to_list()
+    predicted = list()
+
+    for i in range(data.shape[0]):
+        obs = data[i:i + 1]
+        predicted.append(dtc.predict(obs))
+
+    confusion_matrix = metrics.confusion_matrix(reference, predicted)
+    print(f"\nConfusion Matrix:\n{confusion_matrix}")
 
 
 if __name__ == '__main__':
