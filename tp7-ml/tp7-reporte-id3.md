@@ -1,14 +1,16 @@
-Árboles de decisión
-===
-## 1. Implementar un árbol de decisión y comprobar su funcionamiento
-Se implementó el algoritmo pedido en Python, de acuerdo al pseudo-código provisto. Se ajustó en base al dataset `tenis.csv` y posteriormente se le solicitó que predijera la clase para los mismos datos.
+# Árboles de decisión
+
+## 1\. Implementar un árbol de decisión y comprobar su funcionamiento
+
+Se implementó el algoritmo pedido en Python, de acuerdo al pseudo-código provisto. Se ajustó en base al dataset `tennis.csv` y posteriormente se le solicitó que predijera la clase para los mismos datos.
 
 El árbol de decisión obtenido es el siguiente:
 
 <img src="./attachments/tree.svg">
 
 La matriz de confusión fue la siguiente:
-```txt:
+
+```
 Confusion Matrix and Statistics
 
           Reference
@@ -37,6 +39,6 @@ Prediction FALSE TRUE
        'Positive' Class : TRUE
 ```
 
-## 2. Estrategias de los árboles de decisión para datos de tipo real
-To be continued...
+## 2\. Estrategias de los árboles de decisión para datos de tipo real
 
+To be continued...
