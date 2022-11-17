@@ -10,8 +10,8 @@ Resulta interesante estudiar este fenómeno, ya que causa grandes perdidas a niv
 ## Objetivos
 - Interiorizarse sobre el funcionamiento y procesos que ocurren en la atmósfera, para poder lograr una mayor comprensión de ellos.
 - Será necesario realizar un estudio de las variables que influyen en la formación de granizo y como llevar a cabo su representación en los datasets.
- - Buscar fuentes de datos y recopilar los mismos para construir los datasets de entrenamiento.
- - Implementar el modelo mediante el algoritmo de clasificación random forest, _y de forma tentativa una implementación mediante deep learning._
+- Buscar fuentes de datos y recopilar los mismos para construir los datasets de entrenamiento.
+- Implementar el modelo mediante el algoritmo de clasificación random forest, _y de forma tentativa una implementación mediante deep learning._
 
 ## Limitaciones
 El tiempo meteorológico tiene un comportamiento caótico, por lo que las predicciones del mismo no gozan de gran precisión en el mediano y largo plazo. Por ello, el desarrollo de la solución se concentrará en el pronóstico intradiario, con posibilidad de extenderse hasta una semana por delante con la condición de que las predicciones sean útiles.
@@ -19,16 +19,30 @@ El tiempo meteorológico tiene un comportamiento caótico, por lo que las predic
 La zona geográfica con la que se comenzará a trabajar es el Oasis Norte de la Provincia de Mendoza, Argentina; pero como aún no se sabe con certeza las variables y disponibilidad de las mismas, podría llegar a analizarse otra zona geográfica donde también occuriese este fenómeno meteorológico.
 
 ## Métrica
-Las predicciones del modelo se evaluarán como si se tratase de un problema de clasificación (si ocurrió una tormenta con caída de granizo o no). Se generarán dos dataset: uno de entrenamiento y otro de verificación, con los cuales se podrán obtener métricas para evaluar los modelos.
+El valor de salida del modelo será la probabilidad de que ocurra una tormenta de granizo para un momento y variables meteorológicas dadas, por lo tanto, se trata de un clasificador probabilístico. Para llevar a cabo el entrenamiento se generarán dos dataset: uno de entrenamiento y otro de verificación, con los cuales se podrán obtener métricas para evaluar los modelos generados.
 
-Como se espera que los datasets se encuentren desbalanceados, debido a que las ocurrencias de tormentas con granizo son la minoría; una buena métrica seria el área bajo la curva característica operativa del receptor (AUC ROC). Esta es una medida estadística que podemos utilizar para evaluar las predicciones del modelo utilizando un marco probabilístico.
+La métrica a utilizar para evaluar el rendimiento de cada modelo será una *Puntuación Brier* (BS). Esta puntuación nos permite cuantificar la precisión de predicciones probabilísticas cuando el valor esperado (de referencia) es un valor binario.
 
-De forma breve, la curva ROC muestra la relación entre la tasa de falsos positivos y la tasa de 
-verdaderos positivos para diferentes umbrales de probabilidad de las predicciones del modelo.
+Por ejemplo: Si para un momento dado se obtuvo una probabilidad de tormenta con granizo $P=0.80$, y efectivamente cayó granizo, el puntaje de Brier será $BS=0.20$. Una puntuación $BS=0$ corresponde a una predicción perfecta, mientras que $BS=1$ a una totalmente errónea.
 
-![ROC](https://upload.wikimedia.org/wikipedia/commons/1/13/Roc_curve.svg)
+Nuestro objetivo es encontrar un modelo que minimice esta puntuación para todos los valores en el dataset de verificación. Para ello se utilizará la fórmula del error cuadrático medio:
 
-El objetivo es obtener un modelo que maximice la medida AUC ROC.
+$$ BS = \frac{1}{N} \sum_{t=1}^{N}(f_t - o_t)^2 $$
+
+Donde:
+- $N$ es el número de observaciones del dataset de verificación.
+- $f_t$ es la probabilidad pronosticada por el modelo.
+- $o_t$ es el valor de referencia (1 si cayó granizo, 0 si no)
+
+Además, los modelos obtenidos y de referencia se podrán comparar entre ellos mediante el *índice de habilidad de Brier* (BSS). Este índice nos indica cual es la habilidad relativa entre un modelo y otro de referencia para predecir si cayó o no granizo. Su fórmula es la siguente:
+
+$$ BSS = 1 – \frac{BS}{BS^{ref}} $$ 
+
+Los valores de este índice se interpretan de la siguiente manera:
+- $BSS < 0$ El modelo es menos hábil que el de referencia.
+- $BSS = 0$ El modelo tiene la misma habilidad que el de referencia.
+- $BSS > 0$ El modelo es más hábil que el de referencia.
+- $BSS = 1$ El modelo predice a la perfección.
 
 ## Justificación
 Si bien existen y se utilizan actualmente los modelos numéricos de predicción meteorológica, estos son muy complejos y costosos computacionalmente, por lo que lograr una buena estimación mediante técnicas de machine learning sería positivo. Además, existe una esperanza de que utilizando técnicas de aprendizaje profundo (deep learning) se pueda "hallar" patrones no considerados anteriormente que permitan mejoren las predicciones.
@@ -41,8 +55,8 @@ También podrían resultar de utilidad mediciones de radares meteorológicos, pr
 ## Listado de actividades a realizar
 1. Analizar la bibliografía relacionada en profundidad, para logar un entendimiento sobre el fenómeno en estudio. [7 días]
 2. Buscar recursos donde poder extraer las diversas variables meteorológicas, descargarlas y representarlas en el dataset. [5 días]
-3. Implementar y ajustar el modelo de predicción de tormentas. [5 días]
-4. (Tentativa) Implementar y ajustar el modelo de predicción de tormentas usando TensorFlow. [5 días]
+3. Implementar y ajustar el modelo de predicción de tormentas de granizo. [5 días]
+4. (Tentativa) Implementar y ajustar el modelo de predicción de tormentas de granizo usando TensorFlow. [5 días]
 5. Obtener y analizar los resultados y métricas de los modelos. [2 días]
 7. Escritura de informe final. [7 días]
 
