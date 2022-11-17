@@ -327,18 +327,20 @@ $d$ = tamaño del mayor dominio de las variables
 ## Análisis de complejidad
 AC-3 no tiene en consideración cuando el problema dado se trata de un CSP estructurado en forma de árbol, por lo que su ejecución será la misma que si se tratase de un CSP en forma de grafo.
 
-- Comienza inicializando la cola con 2$e$ árcos.
+- Comienza inicializando la cola con $2e$ árcos.
 - Posteriormente, extrae cada arco y ejecuta el método `REVISE`, este con una complejidad $d^2$.
 - Y, cuando se detecte un valor inconsistente y se deba restringir el dominio en una variable, se deberá agregar a la cola el resto de las variables vecinas para ser analizadas nuevamente. Esto podría ocurrir como mucho $d$ veces en cada arco del CSP.
 
 Por lo tanto, será necesario llamar $2ed$ veces a `REVISE`, que tiene una complejidad $d^2$, multiplicando se obtiene $2ed^3$, es decir $O(ed^3)$.
 
-
 # Actividad 4
-
+AC-3 coloca de nuevo en la cola todo arco (Xk, Xi) cuando cualquier valor es removido del dominio de Xi incluso si cada valor de Xk es consistente con los valores restantes de Xi. Es posible por cada arco ( Xk,Xi) llevar la cuenta del número de valores que quedan de Xi que sean consistentes con Xk. Explicar como actualizar ese número de manera eficiente y demostrar que la arco consistencia 
+puede lograrse en un tiempo total O(n2d2 )
 
 # Actividad 5
-
+Demostrar la correctitud del algoritmo CSP para árboles estructurados (sección 5.4, p. 172 AIMA 2da edición). Para ello, demostrar:
+	a. Que para un CSP cuyo grafo de restricciones es un árbol, 2-consistencia (consistencia de arco) implica n-consistencia (siendo n número total de variables)
+	b. Argumentar por qué lo demostrado en a. es suficiente.
 
 # Actividad 6
 Implementar una solución al problema de las n-reinas utilizando una formulación CSP. Se deberá implementar mediante backtracking y encadenamiento hacia adelante.
