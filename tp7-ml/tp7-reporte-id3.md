@@ -41,4 +41,9 @@ Prediction FALSE TRUE
 
 ## 2\. Estrategias de los árboles de decisión para datos de tipo real
 
-To be continued...
+Respecto a estas estrategias, se encuentran diferenciadas en función si serán aplicadas a los valores de entrada o de salida del árbol de decisión.
+
+Si hablamos de valores de entrada, una buena forma para tratar con estos cuando son de tipo real es establecer *puntos de división* (split points), donde se efectuarán test de *desigualdad* en los nodos del árbol. Por ejemplo, un nodo podría comprobar si para un valor dado la altura es menor a 160 (Altura < 160), y en base a esa desigualdad, realizar la división. Existen métodos eficientes para encontrar buenos puntos de división.
+
+En cambio, si quisiéramos tratar con valores de salida representándolos como valores continuos (por ejemplo: La predicción del precio de un departamento), necesitamos utilizar un *árbol de regresión*. Este tipo de árboles se diferencia de los árboles de clasificación en que en sus nodos hoja, en lugar de tener un único valor fijo, tienen una función lineal de un subconjunto de los atributos numéricos utilizados. Será tarea del algoritmo de aprendizaje decidir cuando dejar de dividir y comenzar a aplicar la regresión lineal.
+
